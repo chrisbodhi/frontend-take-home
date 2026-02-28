@@ -1,0 +1,48 @@
+{
+  "app": {
+    "title": "Admin Dashboard"
+  },
+  "tabs": {
+    "users": "Users",
+    "roles": "Roles"
+  },
+  "users": {
+    "searchPlaceholder": "Search by name...",
+    "addUser": "Add user",
+    "columnUser": "User",
+    "columnRole": "Role",
+    "columnJoined": "Joined",
+    "editUser": "Edit user",
+    "deleteUser": "Delete user",
+    "deleteConfirmTitle": "Delete user",
+    "deleteConfirmMessage": "Are you sure? The user <strong>{{name}}</strong> will be permanently deleted.",
+    "deleteConfirmButton": "Delete user",
+    "cancel": "Cancel",
+    "emptyState": "No users found.",
+    "emptySearchState": "No users match \"{{search}}\"."
+  },
+  "roles": {
+    "searchPlaceholder": "Search roles...",
+    "columnName": "Name",
+    "columnDescription": "Description",
+    "columnType": "Type",
+    "columnCreated": "Created",
+    "defaultBadge": "Default",
+    "emptyState": "No roles found.",
+    "emptySearchState": "No roles match \"{{search}}\".",
+    "renameError": "Failed to rename role: {{message}}",
+    "renameDuplicate": "A role with that name already exists."
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "error": {
+    "generic": "Something went wrong.",
+    "retry": "Try again"
+  },
+  "theme": {
+    "toggleDark": "Switch to dark mode",
+    "toggleLight": "Switch to light mode"
+  }
+}

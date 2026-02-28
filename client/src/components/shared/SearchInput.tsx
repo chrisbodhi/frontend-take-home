@@ -1,0 +1,58 @@
+import { useEffect, useRef, useState } from "react";
+import { TextField } from "@radix-ui/themes";
+import { Search } from "lucide-react";
+
+interface SearchInputProps {
+  /** Current value (from URL params) */
+  value: string;
+  /** Called with the debounced value */
+  onChange: (value: string) => void;
+  placeholder?: string;
+  /** Debounce delay in ms */
+  delay?: number;
+}
+
+export function SearchInput({
+  value,
+  onChange,
+  placeholder,
+  delay = 300,
+}: SearchInputProps) {
+  // Local state for immediate keystroke feedback
+  const [localValue, setLocalValue] = useState(value);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  // Sync external value changes (e.g. browser back/forward)
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const next = e.target.value;
+    setLocalValue(next);
+
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      onChange(next);
+    }, delay);
+  }
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => clearTimeout(timerRef.current);
+  }, []);
+
+  return (
+    <TextField.Root
+      size="3"
+      value={localValue}
+      onChange={handleChange}
+      placeholder={placeholder}
+      style={{ flexGrow: 1 }}
+    >
+      <TextField.Slot>
+        <Search size={16} strokeWidth={2} />
+      </TextField.Slot>
+    </TextField.Root>
+  );
+}
