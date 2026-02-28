@@ -1,5 +1,5 @@
 import { Callout, Button } from "@radix-ui/themes";
-import { AlertTriangle } from "lucide-react";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { useTranslation } from "react-i18next";
 
 interface ErrorBannerProps {
@@ -13,7 +13,7 @@ export function ErrorBanner({ message, onRetry }: ErrorBannerProps) {
   return (
     <Callout.Root color="red" role="alert" mt="4">
       <Callout.Icon>
-        <AlertTriangle size={16} />
+        <ExclamationTriangleIcon />
       </Callout.Icon>
       <Callout.Text>
         {message ?? t("error.generic")}{" "}

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Flex, IconButton, Text, TextField } from "@radix-ui/themes";
-import { Check, X, Pencil } from "lucide-react";
+import { CheckIcon, Cross2Icon, Pencil2Icon } from "@radix-ui/react-icons";
 import { useRenameRole } from "../../api/roles";
 import { ApiClientError } from "../../api/client";
 
@@ -82,7 +82,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
           aria-label={`Rename ${currentName}`}
           className="role-edit-button"
         >
-          <Pencil size={14} />
+          <Pencil2Icon />
         </IconButton>
       </Flex>
     );
@@ -111,7 +111,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
           disabled={renameRole.isPending}
           aria-label="Save"
         >
-          <Check size={14} />
+          <CheckIcon />
         </IconButton>
         <IconButton
           variant="soft"
@@ -121,7 +121,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
           disabled={renameRole.isPending}
           aria-label="Cancel"
         >
-          <X size={14} />
+          <Cross2Icon />
         </IconButton>
       </Flex>
       {error && (

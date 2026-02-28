@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DropdownMenu, IconButton } from "@radix-ui/themes";
-import { MoreHorizontal } from "lucide-react";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { useTranslation } from "react-i18next";
 import { DeleteUserDialog } from "./DeleteUserDialog";
 import type { User } from "../../types";
@@ -23,7 +23,7 @@ export function UserActionMenu({ user }: UserActionMenuProps) {
             size="2"
             aria-label="User actions"
           >
-            <MoreHorizontal size={16} />
+            <DotsHorizontalIcon />
           </IconButton>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content align="end">

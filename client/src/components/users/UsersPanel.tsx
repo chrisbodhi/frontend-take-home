@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { Box, Button, Flex } from "@radix-ui/themes";
-import { Plus } from "lucide-react";
+import { PlusIcon } from "@radix-ui/react-icons";
 import { useTranslation } from "react-i18next";
 import { useUsers } from "../../api/users";
 import { useRolesLookup } from "../../api/roles";
@@ -46,7 +46,7 @@ export function UsersPanel({
           placeholder={t("users.searchPlaceholder")}
         />
         <Button disabled style={{ flexShrink: 0 }}>
-          <Plus size={16} />
+          <PlusIcon />
           {t("users.addUser")}
         </Button>
       </Flex>

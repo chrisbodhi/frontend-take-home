@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { TextField } from "@radix-ui/themes";
-import { Search } from "lucide-react";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 interface SearchInputProps {
   /** Current value (from URL params) */
@@ -51,7 +51,7 @@ export function SearchInput({
       style={{ flexGrow: 1 }}
     >
       <TextField.Slot>
-        <Search size={16} strokeWidth={2} />
+        <MagnifyingGlassIcon />
       </TextField.Slot>
     </TextField.Root>
   );

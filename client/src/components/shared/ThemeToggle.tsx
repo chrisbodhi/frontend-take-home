@@ -1,5 +1,5 @@
 import { IconButton, Tooltip } from "@radix-ui/themes";
-import { Moon, Sun } from "lucide-react";
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTranslation } from "react-i18next";
 
 interface ThemeToggleProps {
@@ -21,7 +21,7 @@ export function ThemeToggle({ appearance, onToggle }: ThemeToggleProps) {
         onClick={onToggle}
         aria-label={label}
       >
-        {isDark ? <Sun size={18} /> : <Moon size={18} />}
+        {isDark ? <SunIcon /> : <MoonIcon />}
       </IconButton>
     </Tooltip>
   );
