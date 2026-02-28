@@ -1,8 +1,7 @@
 import { useState, useCallback } from "react";
-import { Theme, Container, Flex } from "@radix-ui/themes";
+import { Theme, Container } from "@radix-ui/themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TabLayout } from "./TabLayout";
-import { ThemeToggle } from "./shared/ThemeToggle";
 import { useQueryParams } from "../hooks/useQueryParams";
 import type { AppQueryParams } from "../types";
 
@@ -53,15 +52,14 @@ export function App() {
         scaling="100%"
       >
         <Container size="4" px="4" py="6">
-          <Flex justify="end" mb="4">
-            <ThemeToggle
-              appearance={appearance}
-              onToggle={() =>
-                setAppearance((a) => (a === "light" ? "dark" : "light"))
-              }
-            />
-          </Flex>
-          <TabLayout params={params} onParamsChange={handleParamsChange} />
+          <TabLayout
+            params={params}
+            onParamsChange={handleParamsChange}
+            appearance={appearance}
+            onToggleTheme={() =>
+              setAppearance((a) => (a === "light" ? "dark" : "light"))
+            }
+          />
         </Container>
       </Theme>
     </QueryClientProvider>

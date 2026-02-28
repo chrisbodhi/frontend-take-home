@@ -3,13 +3,21 @@ import { useTranslation } from "react-i18next";
 import { UsersPanel } from "./users/UsersPanel";
 import { RolesPanel } from "./roles/RolesPanel";
 import type { AppQueryParams } from "../types";
+import { ThemeToggle } from "./shared/ThemeToggle";
 
 interface TabLayoutProps {
   params: AppQueryParams;
   onParamsChange: (next: Partial<AppQueryParams>) => void;
+  appearance: "light" | "dark";
+  onToggleTheme: () => void;
 }
 
-export function TabLayout({ params, onParamsChange }: TabLayoutProps) {
+export function TabLayout({
+  params,
+  onParamsChange,
+  appearance,
+  onToggleTheme,
+}: TabLayoutProps) {
   const { t } = useTranslation();
 
   function handleTabChange(value: string) {
@@ -26,6 +34,16 @@ export function TabLayout({ params, onParamsChange }: TabLayoutProps) {
       <Tabs.List>
         <Tabs.Trigger value="users">{t("tabs.users")}</Tabs.Trigger>
         <Tabs.Trigger value="roles">{t("tabs.roles")}</Tabs.Trigger>
+        <div
+          style={{
+            marginLeft: "auto",
+            display: "flex",
+            alignItems: "center",
+            paddingRight: 6,
+          }}
+        >
+          <ThemeToggle appearance={appearance} onToggle={onToggleTheme} />
+        </div>
       </Tabs.List>
 
       <Tabs.Content value="users" style={{ paddingTop: 24 }}>
