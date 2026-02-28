@@ -125,7 +125,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
         </IconButton>
       </Flex>
       {error && (
-        <Text color="red" size="1">
+        <Text color="red" size="1" role="alert">
           {error}
         </Text>
       )}

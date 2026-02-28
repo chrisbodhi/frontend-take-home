@@ -37,6 +37,8 @@ export function RolesTable({
   return (
     <Table.Root
       variant="surface"
+      aria-label={t("roles.tableLabel")}
+      aria-busy={isLoading || isFetching}
       style={{
         opacity: !isLoading && isFetching ? 0.6 : 1,
         transition: "opacity 150ms ease",

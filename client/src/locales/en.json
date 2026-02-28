@@ -7,6 +7,8 @@
     "roles": "Roles"
   },
   "users": {
+    "tableLabel": "Users",
+    "searchLabel": "Search users",
     "searchPlaceholder": "Search by name...",
     "addUser": "Add user",
     "columnUser": "User",
@@ -22,6 +24,8 @@
     "emptySearchState": "No users match \"{{search}}\"."
   },
   "roles": {
+    "tableLabel": "Roles",
+    "searchLabel": "Search roles",
     "searchPlaceholder": "Search roles...",
     "columnName": "Name",
     "columnDescription": "Description",
@@ -35,7 +39,8 @@
   },
   "pagination": {
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "status": "Page {{page}} of {{pages}}"
   },
   "error": {
     "generic": "Something went wrong.",

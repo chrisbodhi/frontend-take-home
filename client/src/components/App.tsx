@@ -51,7 +51,7 @@ export function App() {
         radius="medium"
         scaling="100%"
       >
-        <Container size="4" px="4" py="6">
+        <Container as="main" size="4" px="4" py="6">
           <TabLayout
             params={params}
             onParamsChange={handleParamsChange}

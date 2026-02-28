@@ -37,6 +37,7 @@ export function RolesPanel({
           value={search}
           onChange={handleSearch}
           placeholder={t("roles.searchPlaceholder")}
+          aria-label={t("roles.searchLabel")}
         />
       </Flex>
 

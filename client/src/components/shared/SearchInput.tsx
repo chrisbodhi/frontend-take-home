@@ -8,6 +8,7 @@ interface SearchInputProps {
   /** Called with the debounced value */
   onChange: (value: string) => void;
   placeholder?: string;
+  "aria-label"?: string;
   /** Debounce delay in ms */
   delay?: number;
 }
@@ -16,6 +17,7 @@ export function SearchInput({
   value,
   onChange,
   placeholder,
+  "aria-label": ariaLabel,
   delay = 300,
 }: SearchInputProps) {
   // Local state for immediate keystroke feedback
@@ -49,6 +51,7 @@ export function SearchInput({
       value={localValue}
       onChange={handleChange}
       placeholder={placeholder}
+      aria-label={ariaLabel}
       style={{ flexGrow: 1 }}
     >
       <TextField.Slot>

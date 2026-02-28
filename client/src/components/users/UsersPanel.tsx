@@ -43,6 +43,7 @@ export function UsersPanel({
           value={search}
           onChange={handleSearch}
           placeholder={t("users.searchPlaceholder")}
+          aria-label={t("users.searchLabel")}
         />
         <Button
           style={{
