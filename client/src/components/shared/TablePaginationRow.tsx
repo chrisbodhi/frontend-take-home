@@ -23,6 +23,7 @@ export function TablePaginationRow({
       <Table.Cell colSpan={colSpan}>
         <Flex justify="end" gap="2">
           <Button
+            size="1"
             variant={page <= 1 ? "soft" : "outline"}
             color="gray"
             disabled={page <= 1}
@@ -31,6 +32,7 @@ export function TablePaginationRow({
             <Text weight="bold">{t("pagination.previous")}</Text>
           </Button>
           <Button
+            size="1"
             variant={page >= pages ? "soft" : "outline"}
             color="gray"
             disabled={page >= pages}
