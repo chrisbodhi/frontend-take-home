@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Flex, IconButton, Text, TextField } from "@radix-ui/themes";
 import { CheckIcon, Cross2Icon, Pencil2Icon } from "@radix-ui/react-icons";
+import { useTranslation } from "react-i18next";
 import { useRenameRole } from "../../api/roles";
 import { ApiClientError } from "../../api/client";
 
@@ -15,6 +16,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const renameRole = useRenameRole();
+  const { t } = useTranslation();
 
   // Focus input when entering edit mode
   useEffect(() => {
@@ -79,7 +81,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
           color="gray"
           size="1"
           onClick={startEditing}
-          aria-label={`Rename ${currentName}`}
+          aria-label={t("roles.renameButton", { name: currentName })}
           className="role-edit-button"
         >
           <Pencil2Icon />
@@ -101,6 +103,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
           }}
           onKeyDown={handleKeyDown}
           disabled={renameRole.isPending}
+          aria-label={t("roles.roleNameLabel")}
           style={{ minWidth: 180 }}
         />
         <IconButton
@@ -109,7 +112,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
           size="1"
           onClick={save}
           disabled={renameRole.isPending}
-          aria-label="Save"
+          aria-label={t("roles.saveButton")}
         >
           <CheckIcon />
         </IconButton>
@@ -119,7 +122,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
           size="1"
           onClick={cancel}
           disabled={renameRole.isPending}
-          aria-label="Cancel"
+          aria-label={t("roles.cancelButton")}
         >
           <Cross2Icon />
         </IconButton>

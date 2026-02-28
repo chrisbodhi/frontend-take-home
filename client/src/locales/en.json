@@ -34,6 +34,10 @@
     "defaultBadge": "Default",
     "emptyState": "No roles found.",
     "emptySearchState": "No roles match \"{{search}}\".",
+    "renameButton": "Rename {{name}}",
+    "roleNameLabel": "Role name",
+    "saveButton": "Save",
+    "cancelButton": "Cancel",
     "renameError": "Failed to rename role: {{message}}",
     "renameDuplicate": "A role with that name already exists."
   },
