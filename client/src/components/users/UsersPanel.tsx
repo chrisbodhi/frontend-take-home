@@ -38,13 +38,19 @@ export function UsersPanel({
 
   return (
     <Box>
-      <Flex gap="3" mb="4" align="center">
+      <Flex gap="2" mb="5" align="center">
         <SearchInput
           value={search}
           onChange={handleSearch}
           placeholder={t("users.searchPlaceholder")}
         />
-        <Button disabled style={{ flexShrink: 0 }}>
+        <Button
+          style={{
+            flexShrink: 0,
+            paddingRight: 16,
+            paddingLeft: 16,
+          }}
+        >
           <PlusIcon />
           {t("users.addUser")}
         </Button>

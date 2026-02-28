@@ -25,16 +25,16 @@ export function UserRow({ user, role }: UserRowProps) {
   const fullName = `${user.first} ${user.last}`;
 
   return (
-    <Table.Row>
+    <Table.Row align="center">
       <Table.Cell>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <Avatar
-            size="3"
+            size="1"
             src={user.photo}
             fallback={getInitials(user.first, user.last)}
             radius="full"
           />
-          <Text weight="medium">{fullName}</Text>
+          <Text>{fullName}</Text>
         </div>
       </Table.Cell>
       <Table.Cell>

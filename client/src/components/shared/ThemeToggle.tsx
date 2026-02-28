@@ -13,7 +13,7 @@ export function ThemeToggle({ appearance, onToggle }: ThemeToggleProps) {
   const label = isDark ? t("theme.toggleLight") : t("theme.toggleDark");
 
   return (
-    <Tooltip content={label}>
+    <Tooltip content={label} side="bottom">
       <IconButton
         variant="ghost"
         color="gray"

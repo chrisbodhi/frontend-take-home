@@ -1,4 +1,4 @@
-import { Button, Flex } from "@radix-ui/themes";
+import { Button, Flex, Text } from "@radix-ui/themes";
 import { useTranslation } from "react-i18next";
 
 interface PaginationProps {
@@ -15,20 +15,20 @@ export function Pagination({ page, pages, onPageChange }: PaginationProps) {
   return (
     <Flex justify="end" gap="2" py="3" px="3">
       <Button
-        variant="outline"
+        variant={page <= 1 ? "soft" : "outline"}
         color="gray"
         disabled={page <= 1}
         onClick={() => onPageChange(page - 1)}
       >
-        {t("pagination.previous")}
+        <Text weight="bold">{t("pagination.previous")}</Text>
       </Button>
       <Button
-        variant="outline"
+        variant={page >= pages ? "soft" : "outline"}
         color="gray"
         disabled={page >= pages}
         onClick={() => onPageChange(page + 1)}
       >
-        {t("pagination.next")}
+        <Text weight="bold">{t("pagination.next")}</Text>
       </Button>
     </Flex>
   );

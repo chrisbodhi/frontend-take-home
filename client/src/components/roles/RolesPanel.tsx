@@ -32,7 +32,7 @@ export function RolesPanel({
 
   return (
     <Box>
-      <Flex gap="3" mb="4" align="center">
+      <Flex gap="2" mb="5" align="center">
         <SearchInput
           value={search}
           onChange={handleSearch}

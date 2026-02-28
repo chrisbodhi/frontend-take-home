@@ -1,4 +1,4 @@
-import { AlertDialog, Button, Flex } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex, Text } from "@radix-ui/themes";
 import { useTranslation, Trans } from "react-i18next";
 import { useDeleteUser } from "../../api/users";
 import type { User } from "../../types";
@@ -38,12 +38,13 @@ export function DeleteUserDialog({
 
         <Flex gap="3" mt="4" justify="end">
           <AlertDialog.Cancel>
-            <Button variant="soft" color="gray">
-              {t("users.cancel")}
+            <Button variant="outline" color="gray">
+              <Text weight="bold">{t("users.cancel")}</Text>
             </Button>
           </AlertDialog.Cancel>
           <Button
             color="red"
+            variant="surface"
             onClick={handleDelete}
             disabled={deleteUser.isPending}
           >

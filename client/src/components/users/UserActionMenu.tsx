@@ -21,15 +21,15 @@ export function UserActionMenu({ user }: UserActionMenuProps) {
             variant="ghost"
             color="gray"
             size="2"
+            radius="full"
             aria-label="User actions"
           >
             <DotsHorizontalIcon />
           </IconButton>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content align="end">
-          <DropdownMenu.Item disabled>{t("users.editUser")}</DropdownMenu.Item>
-          <DropdownMenu.Separator />
-          <DropdownMenu.Item color="red" onSelect={() => setDeleteOpen(true)}>
+          <DropdownMenu.Item>{t("users.editUser")}</DropdownMenu.Item>
+          <DropdownMenu.Item onSelect={() => setDeleteOpen(true)}>
             {t("users.deleteUser")}
           </DropdownMenu.Item>
         </DropdownMenu.Content>

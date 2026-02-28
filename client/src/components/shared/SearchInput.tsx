@@ -44,7 +44,8 @@ export function SearchInput({
 
   return (
     <TextField.Root
-      size="3"
+      size="2"
+      name="search"
       value={localValue}
       onChange={handleChange}
       placeholder={placeholder}

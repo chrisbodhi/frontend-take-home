@@ -47,7 +47,7 @@ export function UsersTable({
           <Table.ColumnHeaderCell>
             {t("users.columnJoined")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell />
+          <Table.ColumnHeaderCell width="0" />
         </Table.Row>
       </Table.Header>
 
