@@ -2,6 +2,7 @@ import { Table, Text } from "@radix-ui/themes";
 import { useTranslation } from "react-i18next";
 import { UserRow } from "./UserRow";
 import { TableSkeleton } from "../shared/TableSkeleton";
+import { TablePaginationRow } from "../shared/TablePaginationRow";
 import type { User, Role } from "../../types";
 
 interface UsersTableProps {
@@ -10,6 +11,9 @@ interface UsersTableProps {
   isLoading: boolean;
   isFetching: boolean;
   search: string;
+  page?: number;
+  pages?: number;
+  onPageChange?: (page: number) => void;
 }
 
 export function UsersTable({
@@ -18,6 +22,9 @@ export function UsersTable({
   isLoading,
   isFetching,
   search,
+  page,
+  pages,
+  onPageChange,
 }: UsersTableProps) {
   const { t } = useTranslation();
 
@@ -66,6 +73,18 @@ export function UsersTable({
             />
           ))
         )}
+        {!isLoading &&
+          users.length > 0 &&
+          page != null &&
+          pages != null &&
+          onPageChange != null && (
+            <TablePaginationRow
+              colSpan={4}
+              page={page}
+              pages={pages}
+              onPageChange={onPageChange}
+            />
+          )}
       </Table.Body>
     </Table.Root>
   );

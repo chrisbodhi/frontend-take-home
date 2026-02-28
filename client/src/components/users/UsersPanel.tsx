@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useUsers } from "../../api/users";
 import { useRolesLookup } from "../../api/roles";
 import { SearchInput } from "../shared/SearchInput";
-import { Pagination } from "../shared/Pagination";
 import { ErrorBanner } from "../shared/ErrorBanner";
 import { UsersTable } from "./UsersTable";
 
@@ -54,22 +53,16 @@ export function UsersPanel({
       {usersQuery.isError ? (
         <ErrorBanner onRetry={() => usersQuery.refetch()} />
       ) : (
-        <>
-          <UsersTable
-            users={usersQuery.data?.data ?? []}
-            rolesById={rolesById}
-            isLoading={isLoading}
-            isFetching={usersQuery.isFetching}
-            search={search}
-          />
-          {usersQuery.data && (
-            <Pagination
-              page={page}
-              pages={usersQuery.data.pages}
-              onPageChange={onPageChange}
-            />
-          )}
-        </>
+        <UsersTable
+          users={usersQuery.data?.data ?? []}
+          rolesById={rolesById}
+          isLoading={isLoading}
+          isFetching={usersQuery.isFetching}
+          search={search}
+          page={page}
+          pages={usersQuery.data?.pages}
+          onPageChange={onPageChange}
+        />
       )}
     </Box>
   );

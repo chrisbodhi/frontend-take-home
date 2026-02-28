@@ -2,6 +2,7 @@ import { Badge, Table, Text } from "@radix-ui/themes";
 import { useTranslation } from "react-i18next";
 import { RoleNameEditor } from "./RoleNameEditor";
 import { TableSkeleton } from "../shared/TableSkeleton";
+import { TablePaginationRow } from "../shared/TablePaginationRow";
 import type { Role } from "../../types";
 
 interface RolesTableProps {
@@ -9,6 +10,9 @@ interface RolesTableProps {
   isLoading: boolean;
   isFetching: boolean;
   search: string;
+  page?: number;
+  pages?: number;
+  onPageChange?: (page: number) => void;
 }
 
 function formatDate(iso: string, locale = "en-US"): string {
@@ -24,6 +28,9 @@ export function RolesTable({
   isLoading,
   isFetching,
   search,
+  page,
+  pages,
+  onPageChange,
 }: RolesTableProps) {
   const { t } = useTranslation();
 
@@ -87,6 +94,18 @@ export function RolesTable({
             </Table.Row>
           ))
         )}
+        {!isLoading &&
+          roles.length > 0 &&
+          page != null &&
+          pages != null &&
+          onPageChange != null && (
+            <TablePaginationRow
+              colSpan={4}
+              page={page}
+              pages={pages}
+              onPageChange={onPageChange}
+            />
+          )}
       </Table.Body>
     </Table.Root>
   );

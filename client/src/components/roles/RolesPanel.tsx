@@ -3,7 +3,6 @@ import { Box, Flex } from "@radix-ui/themes";
 import { useTranslation } from "react-i18next";
 import { useRoles } from "../../api/roles";
 import { SearchInput } from "../shared/SearchInput";
-import { Pagination } from "../shared/Pagination";
 import { ErrorBanner } from "../shared/ErrorBanner";
 import { RolesTable } from "./RolesTable";
 
@@ -44,21 +43,15 @@ export function RolesPanel({
       {rolesQuery.isError ? (
         <ErrorBanner onRetry={() => rolesQuery.refetch()} />
       ) : (
-        <>
-          <RolesTable
-            roles={rolesQuery.data?.data ?? []}
-            isLoading={rolesQuery.isLoading}
-            isFetching={rolesQuery.isFetching}
-            search={search}
-          />
-          {rolesQuery.data && (
-            <Pagination
-              page={page}
-              pages={rolesQuery.data.pages}
-              onPageChange={onPageChange}
-            />
-          )}
-        </>
+        <RolesTable
+          roles={rolesQuery.data?.data ?? []}
+          isLoading={rolesQuery.isLoading}
+          isFetching={rolesQuery.isFetching}
+          search={search}
+          page={page}
+          pages={rolesQuery.data?.pages}
+          onPageChange={onPageChange}
+        />
       )}
     </Box>
   );
