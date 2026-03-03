@@ -54,10 +54,7 @@ function Toast({ data }: { data: ToastData }) {
         <Flex align="center" gap="2" style={{ flexShrink: 0 }}>
           {data.action && (
             <RadixToast.Action altText={data.action.label} asChild>
-              <button
-                className="toast-action"
-                onClick={data.action.onClick}
-              >
+              <button className="toast-action" onClick={data.action.onClick}>
                 <Text size="2" weight="bold">
                   {data.action.label}
                 </Text>

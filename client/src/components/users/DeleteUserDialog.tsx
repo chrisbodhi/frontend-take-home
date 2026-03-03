@@ -43,11 +43,7 @@ export function DeleteUserDialog({
               <Text weight="bold">{t("users.cancel")}</Text>
             </Button>
           </AlertDialog.Cancel>
-          <Button
-            color="red"
-            variant="surface"
-            onClick={handleDelete}
-          >
+          <Button color="red" variant="surface" onClick={handleDelete}>
             {t("users.deleteConfirmButton")}
           </Button>
         </Flex>

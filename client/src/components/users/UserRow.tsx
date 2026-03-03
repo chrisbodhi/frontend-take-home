@@ -39,7 +39,9 @@ export function UserRow({
     <Table.Row
       align="center"
       className={exiting ? "row-exit" : "row-enter"}
-      style={exiting ? undefined : ({ "--row-index": index } as React.CSSProperties)}
+      style={
+        exiting ? undefined : ({ "--row-index": index } as React.CSSProperties)
+      }
       onAnimationEnd={
         exiting
           ? (e: React.AnimationEvent) => {

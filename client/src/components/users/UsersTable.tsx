@@ -67,7 +67,7 @@ export function UsersTable({
       const userName = user ? `${user.first} ${user.last}` : "";
       setTimeout(() => {
         const trigger = tableRef.current?.querySelector<HTMLElement>(
-          `[aria-label="${t("users.userActionsLabel", { name: userName })}"]`
+          `[aria-label="${t("users.userActionsLabel", { name: userName })}"]`,
         );
         trigger?.focus();
         setUserToDelete(null);
