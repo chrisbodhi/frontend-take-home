@@ -1,0 +1,192 @@
+/* ── Toast viewport (replaces toast-container) ───────────────────── */
+
+.toast-viewport {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 420px;
+  width: calc(100% - 32px);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+/* ── Individual toast ─────────────────────────────────────────────── */
+
+.toast {
+  position: relative;
+  overflow: hidden;
+  border-left: 3px solid;
+  background: var(--color-panel);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  padding: var(--space-3) var(--space-4);
+}
+
+.toast[data-state="open"] {
+  animation: toast-enter 200ms ease-out forwards;
+}
+
+.toast[data-state="closed"] {
+  animation: toast-exit 150ms ease-in forwards;
+}
+
+.toast[data-swipe="move"] {
+  transform: translateX(var(--radix-toast-swipe-move-x));
+}
+
+.toast[data-swipe="cancel"] {
+  transform: translateX(0);
+  transition: transform 200ms ease-out;
+}
+
+.toast[data-swipe="end"] {
+  animation: toast-swipe-out 100ms ease-out forwards;
+}
+
+.toast--success {
+  border-left-color: var(--green-9);
+}
+
+.toast--error {
+  border-left-color: var(--red-9);
+}
+
+.toast--undo {
+  border-left-color: var(--iris-9);
+}
+
+/* ── Action & close buttons ──────────────────────────────────────── */
+
+.toast-action,
+.toast-close {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-2);
+}
+
+.toast-action {
+  padding: var(--space-1) var(--space-2);
+  color: var(--accent-11);
+}
+
+.toast-action:hover {
+  background: var(--accent-a3);
+}
+
+.toast-action:focus-visible {
+  outline: 2px solid var(--accent-8);
+  outline-offset: 1px;
+}
+
+.toast-close {
+  width: 24px;
+  height: 24px;
+  color: var(--gray-11);
+}
+
+.toast-close:hover {
+  background: var(--gray-a3);
+}
+
+.toast-close:focus-visible {
+  outline: 2px solid var(--accent-8);
+  outline-offset: 1px;
+}
+
+/* ── Progress bar (undo toast) ────────────────────────────────────── */
+
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--iris-9);
+  animation: toast-progress linear forwards;
+  animation-duration: var(--toast-duration);
+}
+
+/* ── Animations ───────────────────────────────────────────────────── */
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@keyframes toast-swipe-out {
+  from {
+    transform: translateX(var(--radix-toast-swipe-end-x));
+  }
+  to {
+    transform: translateX(calc(100% + 24px));
+  }
+}
+
+@keyframes toast-progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .toast[data-state="open"] {
+    animation: toast-enter-reduced 200ms ease-out forwards;
+  }
+
+  .toast[data-state="closed"] {
+    animation: toast-exit-reduced 150ms ease-in forwards;
+  }
+
+  .toast[data-swipe="end"] {
+    animation: toast-exit-reduced 150ms ease-in forwards;
+  }
+
+  @keyframes toast-enter-reduced {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes toast-exit-reduced {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}

@@ -55,5 +55,13 @@
   "theme": {
     "toggleDark": "Switch to dark mode",
     "toggleLight": "Switch to light mode"
+  },
+  "toast": {
+    "userDeleted": "\"{{name}}\" deleted",
+    "userDeleteUndone": "Delete undone",
+    "userDeleteFailed": "Failed to delete user",
+    "roleRenamed": "Role renamed to \"{{name}}\"",
+    "undo": "Undo",
+    "dismiss": "Dismiss notification"
   }
 }

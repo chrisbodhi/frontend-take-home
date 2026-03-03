@@ -5,6 +5,7 @@ import { UserRow } from "./UserRow";
 import { DeleteUserDialog } from "./DeleteUserDialog";
 import { TableSkeleton } from "../shared/TableSkeleton";
 import { TablePaginationRow } from "../shared/TablePaginationRow";
+import { useDeferredDelete } from "../../hooks/useDeferredDelete";
 import type { User, Role } from "../../types";
 
 interface UsersTableProps {
@@ -30,6 +31,7 @@ export function UsersTable({
 }: UsersTableProps) {
   const { t } = useTranslation();
   const tableRef = useRef<HTMLDivElement>(null);
+  const { deferredDelete } = useDeferredDelete();
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const userToDeleteRef = useRef<User | null>(null);
@@ -145,6 +147,7 @@ export function UsersTable({
             if (!open) handleDialogClose();
           }}
           onAfterDelete={handleAfterDelete}
+          onDeferredDelete={deferredDelete}
         />
       )}
     </>

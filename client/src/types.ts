@@ -39,3 +39,17 @@ export interface ApiError {
   message: string;
   status: number;
 }
+
+// For the Toast component
+export interface ToastAction {
+  label: string;
+  onClick: () => void;
+}
+
+export interface ToastData {
+  id: string;
+  type: "success" | "error" | "undo";
+  message: string;
+  action?: ToastAction;
+  duration: number;
+}

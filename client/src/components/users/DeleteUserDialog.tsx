@@ -1,6 +1,5 @@
 import { AlertDialog, Button, Flex, Text } from "@radix-ui/themes";
 import { useTranslation, Trans } from "react-i18next";
-import { useDeleteUser } from "../../api/users";
 import type { User } from "../../types";
 
 interface DeleteUserDialogProps {
@@ -8,6 +7,7 @@ interface DeleteUserDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onAfterDelete: () => void;
+  onDeferredDelete: (userId: string, userName: string) => void;
 }
 
 export function DeleteUserDialog({
@@ -15,17 +15,14 @@ export function DeleteUserDialog({
   open,
   onOpenChange,
   onAfterDelete,
+  onDeferredDelete,
 }: DeleteUserDialogProps) {
   const { t } = useTranslation();
-  const deleteUser = useDeleteUser();
   const fullName = `${user.first} ${user.last}`;
 
-  async function handleDelete() {
-    deleteUser.mutate(user.id, {
-      onSuccess: () => {
-        onAfterDelete();
-      },
-    });
+  function handleDelete() {
+    onDeferredDelete(user.id, fullName);
+    onAfterDelete();
   }
 
   return (
@@ -50,9 +47,8 @@ export function DeleteUserDialog({
             color="red"
             variant="surface"
             onClick={handleDelete}
-            disabled={deleteUser.isPending}
           >
-            {deleteUser.isPending ? "…" : t("users.deleteConfirmButton")}
+            {t("users.deleteConfirmButton")}
           </Button>
         </Flex>
       </AlertDialog.Content>

@@ -3,6 +3,7 @@ import { Flex, IconButton, Text, TextField } from "@radix-ui/themes";
 import { CheckIcon, Cross2Icon, Pencil2Icon } from "@radix-ui/react-icons";
 import { useTranslation } from "react-i18next";
 import { useRenameRole } from "../../api/roles";
+import { useToast } from "../../hooks/useToast";
 import { ApiClientError } from "../../api/client";
 
 interface RoleNameEditorProps {
@@ -17,6 +18,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const renameRole = useRenameRole();
   const { t } = useTranslation();
+  const { toast } = useToast();
 
   // Focus input when entering edit mode
   useEffect(() => {
@@ -51,6 +53,7 @@ export function RoleNameEditor({ roleId, currentName }: RoleNameEditorProps) {
         onSuccess: () => {
           setEditing(false);
           setError(null);
+          toast({ message: t("toast.roleRenamed", { name: trimmed }) });
         },
         onError: (err) => {
           if (err instanceof ApiClientError) {
