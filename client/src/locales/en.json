@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Admin Dashboard"
+    "title": "Admin Dashboard",
+    "mainLabel": "User management dashboard"
   },
   "tabs": {
     "users": "Users",
@@ -19,6 +20,7 @@
     "deleteConfirmTitle": "Delete user",
     "deleteConfirmMessage": "Are you sure? The user <strong>{{name}}</strong> will be permanently deleted.",
     "deleteConfirmButton": "Delete user",
+    "userActionsLabel": "Actions for {{name}}",
     "cancel": "Cancel",
     "emptyState": "No users found.",
     "emptySearchState": "No users match \"{{search}}\"."

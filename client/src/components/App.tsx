@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { Theme, Container } from "@radix-ui/themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { TabLayout } from "./TabLayout";
 import { useQueryParams } from "../hooks/useQueryParams";
 import type { AppQueryParams } from "../types";
@@ -17,6 +18,7 @@ const queryClient = new QueryClient({
 });
 
 export function App() {
+  const { t } = useTranslation();
   const [initialParams] = useQueryParams();
   const [params, setParams] = useState<AppQueryParams>(initialParams);
   const [appearance, setAppearance] = useState<"light" | "dark">("light");
@@ -51,7 +53,7 @@ export function App() {
         radius="medium"
         scaling="100%"
       >
-        <Container as="main" size="4" px="4" py="6">
+        <Container as="main" aria-label={t("app.mainLabel")} size="4" px="4" py="6">
           <TabLayout
             params={params}
             onParamsChange={handleParamsChange}

@@ -7,12 +7,14 @@ interface DeleteUserDialogProps {
   user: User;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onAfterDelete: () => void;
 }
 
 export function DeleteUserDialog({
   user,
   open,
   onOpenChange,
+  onAfterDelete,
 }: DeleteUserDialogProps) {
   const { t } = useTranslation();
   const deleteUser = useDeleteUser();
@@ -20,7 +22,9 @@ export function DeleteUserDialog({
 
   async function handleDelete() {
     deleteUser.mutate(user.id, {
-      onSuccess: () => onOpenChange(false),
+      onSuccess: () => {
+        onAfterDelete();
+      },
     });
   }
 
