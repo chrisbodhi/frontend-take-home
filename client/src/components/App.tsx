@@ -9,6 +9,7 @@ import { useQueryParams } from "../hooks/useQueryParams";
 import type { AppQueryParams } from "../types";
 
 import "@radix-ui/themes/styles.css";
+import "../animations.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {

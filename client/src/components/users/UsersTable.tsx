@@ -34,8 +34,11 @@ export function UsersTable({
   const { deferredDelete } = useDeferredDelete();
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [exitingIds, setExitingIds] = useState<Set<string>>(new Set());
   const userToDeleteRef = useRef<User | null>(null);
   const didDeleteRef = useRef(false);
+  // Stores userId → userName for rows awaiting exit animation
+  const pendingDeletesRef = useRef<Map<string, string>>(new Map());
 
   const handleDeleteRequest = useCallback((user: User) => {
     userToDeleteRef.current = user;
@@ -48,13 +51,17 @@ export function UsersTable({
     const user = userToDeleteRef.current;
 
     if (didDeleteRef.current) {
-      // Row was deleted — focus the table so the next Tab reaches
-      // the first remaining row's action button.
+      // Row was deleted — after the dialog exit animation finishes,
+      // start the row exit animation (stage 2).
       didDeleteRef.current = false;
+      const userId = user?.id;
       setTimeout(() => {
         tableRef.current?.focus();
         setUserToDelete(null);
-      }, 100);
+        if (userId) {
+          setExitingIds((prev) => new Set(prev).add(userId));
+        }
+      }, 200);
     } else {
       // Dialog was cancelled — return focus to the user's action button
       const userName = user ? `${user.first} ${user.last}` : "";
@@ -64,14 +71,39 @@ export function UsersTable({
         );
         trigger?.focus();
         setUserToDelete(null);
-      }, 100);
+      }, 200);
     }
   }, [t]);
+
+  // Stage 1: store delete intent — don't call deferredDelete yet
+  const handleDeferredDelete = useCallback(
+    (userId: string, userName: string) => {
+      pendingDeletesRef.current.set(userId, userName);
+    },
+    [],
+  );
 
   const handleAfterDelete = useCallback(() => {
     didDeleteRef.current = true;
     handleDialogClose();
   }, [handleDialogClose]);
+
+  // Stage 3: exit animation finished — now actually remove from cache
+  const handleExitComplete = useCallback(
+    (userId: string) => {
+      const userName = pendingDeletesRef.current.get(userId);
+      pendingDeletesRef.current.delete(userId);
+      setExitingIds((prev) => {
+        const next = new Set(prev);
+        next.delete(userId);
+        return next;
+      });
+      if (userName != null) {
+        deferredDelete(userId, userName);
+      }
+    },
+    [deferredDelete],
+  );
 
   return (
     <>
@@ -115,12 +147,15 @@ export function UsersTable({
               </Table.Cell>
             </Table.Row>
           ) : (
-            users.map((user) => (
+            users.map((user, i) => (
               <UserRow
                 key={user.id}
                 user={user}
                 role={rolesById.get(user.roleId)}
+                index={i}
+                exiting={exitingIds.has(user.id)}
                 onDeleteRequest={handleDeleteRequest}
+                onExitComplete={() => handleExitComplete(user.id)}
               />
             ))
           )}
@@ -147,7 +182,7 @@ export function UsersTable({
             if (!open) handleDialogClose();
           }}
           onAfterDelete={handleAfterDelete}
-          onDeferredDelete={deferredDelete}
+          onDeferredDelete={handleDeferredDelete}
         />
       )}
     </>

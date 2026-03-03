@@ -75,8 +75,12 @@ export function RolesTable({
             </Table.Cell>
           </Table.Row>
         ) : (
-          roles.map((role) => (
-            <Table.Row key={role.id}>
+          roles.map((role, i) => (
+            <Table.Row
+              key={role.id}
+              className="row-enter"
+              style={{ "--row-index": i } as React.CSSProperties}
+            >
               <Table.Cell>
                 <RoleNameEditor roleId={role.id} currentName={role.name} />
               </Table.Cell>

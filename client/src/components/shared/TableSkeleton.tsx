@@ -16,7 +16,7 @@ export function TableSkeleton({
   return (
     <>
       {Array.from({ length: rows }, (_, rowIdx) => (
-        <Table.Row key={rowIdx}>
+        <Table.Row key={rowIdx} align="center">
           {Array.from({ length: columns }, (_, colIdx) => (
             <Table.Cell key={colIdx}>
               <div className="skeleton-cell">
