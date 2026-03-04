@@ -30,6 +30,6 @@ For the codebase, I'd add more tests. More specifically, a few "happy path" test
 
 ## A word on tooling and process
 
-From my perspective, the value of a takehome evaluation is seeing how a candidate can work when as many of the artificial constraints of the interview environment are removed. The candidate is working on a familiar machine, in a development environment that they've personalized over time -- from the operating system to the code editor or IDE. The idea is to see what the candidate can produce in a scenario that is as close to what the job expects as possible.
+From my perspective, the value of a take-home evaluation is seeing how a candidate can work when as many of the artificial constraints of the interview environment are removed. The candidate is working on a familiar machine, in a development environment that they've personalized over time -- from the operating system to the code editor or IDE. The idea is to see what the candidate can produce in a scenario that is as close to what the job expects as possible.
 
 To that end, for this exercise, I opted to include in my toolbox something that's made a meaningful impact on my productivity over the last year: Claude Code. I set the requirements and standards up front (including the addition of a requirement for internationalization), pushed back on superfluous suggestions, and directed the output at each step where Claude Code handled implementation.
