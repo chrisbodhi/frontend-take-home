@@ -1,11 +1,17 @@
 import { useState, useCallback } from "react";
 import { Theme, Container } from "@radix-ui/themes";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  QueryErrorResetBoundary,
+} from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { TabLayout } from "./TabLayout";
 import { ToastContainer } from "./shared/Toast";
 import { ToastProvider } from "../hooks/useToast";
 import { useQueryParams } from "../hooks/useQueryParams";
+import { ErrorBoundary } from "./shared/ErrorBoundary";
+import { OfflineBanner } from "./shared/OfflineBanner";
 import type { AppQueryParams } from "../types";
 
 import "@radix-ui/themes/styles.css";
@@ -56,20 +62,33 @@ export function App() {
         radius="medium"
         scaling="100%"
       >
+        {/* OfflineBanner is fixed-position and renders outside normal flow */}
+        <OfflineBanner />
         <ToastProvider>
-          <main aria-label={t("app.mainLabel")}>
-            <Container size="4" px="4" py="6">
-              <TabLayout
-                params={params}
-                onParamsChange={handleParamsChange}
-                appearance={appearance}
-                onToggleTheme={() =>
-                  setAppearance((a) => (a === "light" ? "dark" : "light"))
-                }
-              />
-            </Container>
-          </main>
-          <ToastContainer />
+          {/*
+           * QueryErrorResetBoundary clears all React Query error state when the
+           * boundary resets, so retrying after a render crash also re-fires any
+           * queries that had previously failed with throwOnError.
+           */}
+          <QueryErrorResetBoundary>
+            {({ reset }) => (
+              <ErrorBoundary onReset={reset}>
+                <main aria-label={t("app.mainLabel")}>
+                  <Container size="4" px="4" py="6">
+                    <TabLayout
+                      params={params}
+                      onParamsChange={handleParamsChange}
+                      appearance={appearance}
+                      onToggleTheme={() =>
+                        setAppearance((a) => (a === "light" ? "dark" : "light"))
+                      }
+                    />
+                  </Container>
+                </main>
+                <ToastContainer />
+              </ErrorBoundary>
+            )}
+          </QueryErrorResetBoundary>
         </ToastProvider>
       </Theme>
     </QueryClientProvider>

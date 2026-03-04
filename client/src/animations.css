@@ -117,6 +117,26 @@
   }
 }
 
+/* ── Offline / status banner ───────────────────────────────────────
+   Slides in from above the viewport so it never causes a layout shift
+   for content already on screen.
+   ──────────────────────────────────────────────────────────────────── */
+
+.banner-enter {
+  animation: banner-slide-in 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes banner-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ── Reduced motion ────────────────────────────────────────────────
    Opacity-only crossfades are generally acceptable under WCAG
    "reduce motion" — they don't involve spatial movement. We remove
@@ -124,6 +144,10 @@
    ──────────────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
+  .banner-enter {
+    animation: fade-in 150ms ease-out;
+  }
+
   .rt-BaseDialogContent[data-state="open"] {
     animation: fade-in 150ms ease-out;
   }

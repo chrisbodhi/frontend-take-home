@@ -23,9 +23,15 @@ export function UsersPanel({
 }: UsersPanelProps) {
   const { t } = useTranslation();
   const usersQuery = useUsers(page, search);
-  const { rolesById, isLoading: rolesLoading } = useRolesLookup();
+  const {
+    rolesById,
+    isLoading: rolesLoading,
+    isError: rolesError,
+    refetch: refetchRoles,
+  } = useRolesLookup();
 
   const isLoading = usersQuery.isLoading || rolesLoading;
+  const isError = usersQuery.isError || rolesError;
 
   const handleSearch = useCallback(
     (value: string) => {
@@ -57,8 +63,13 @@ export function UsersPanel({
         </Button>
       </Flex>
 
-      {usersQuery.isError ? (
-        <ErrorBanner onRetry={() => usersQuery.refetch()} />
+      {isError ? (
+        <ErrorBanner
+          onRetry={() => {
+            void usersQuery.refetch();
+            void refetchRoles();
+          }}
+        />
       ) : (
         <UsersTable
           users={usersQuery.data?.data ?? []}

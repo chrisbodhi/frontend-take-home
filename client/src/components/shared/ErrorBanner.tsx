@@ -1,4 +1,4 @@
-import { Callout, Button } from "@radix-ui/themes";
+import { Callout, Button, Flex } from "@radix-ui/themes";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { useTranslation } from "react-i18next";
 
@@ -15,13 +15,15 @@ export function ErrorBanner({ message, onRetry }: ErrorBannerProps) {
       <Callout.Icon>
         <ExclamationTriangleIcon />
       </Callout.Icon>
-      <Callout.Text>
-        {message ?? t("error.generic")}{" "}
-        {onRetry && (
-          <Button variant="ghost" size="1" color="red" onClick={onRetry}>
-            {t("error.retry")}
-          </Button>
-        )}
+      <Callout.Text asChild>
+        <Flex direction="column" align="start" gap="2">
+          <span>{message ?? t("error.generic")}</span>
+          {onRetry && (
+            <Button variant="ghost" size="1" color="red" onClick={onRetry}>
+              {t("error.retry")}
+            </Button>
+          )}
+        </Flex>
       </Callout.Text>
     </Callout.Root>
   );

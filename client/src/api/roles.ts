@@ -57,6 +57,7 @@ export function useRolesLookup() {
     queryFn: fetchAllRoles,
     staleTime: Infinity,
     retry: 3,
+    retryDelay: (attempt) => Math.min(500 * 2 ** attempt, 3000),
   });
 
   // Memoized map for O(1) lookups by id
@@ -81,8 +82,42 @@ export function useRenameRole() {
     mutationFn: ({ roleId, name }: { roleId: string; name: string }) =>
       apiClient.patch<Role>(`/roles/${roleId}`, { name }),
 
-    onSuccess: () => {
-      // Invalidate both roles lists AND the lookup (since names changed)
+    onMutate: async ({ roleId, name }) => {
+      // Prevent in-flight refetches from overwriting our optimistic update
+      await queryClient.cancelQueries({ queryKey: roleKeys.all });
+
+      // Snapshot every "roles" cache entry for rollback on error
+      const snapshot = queryClient.getQueriesData({ queryKey: roleKeys.all });
+
+      const patchRole = (role: Role) =>
+        role.id === roleId ? { ...role, name } : role;
+
+      // Optimistically update all paginated list caches
+      queryClient.setQueriesData<PagedData<Role>>(
+        { queryKey: roleKeys.all },
+        (old) => {
+          if (!old || !("data" in old)) return old; // skip non-list shapes
+          return { ...old, data: old.data.map(patchRole) };
+        },
+      );
+
+      // Optimistically update the lookup cache (Role[], not PagedData)
+      queryClient.setQueryData<Role[]>(roleKeys.lookup, (old) =>
+        old?.map(patchRole),
+      );
+
+      return { snapshot };
+    },
+
+    onError: (_err, _vars, context) => {
+      // Roll back every cache to its pre-mutation snapshot
+      context?.snapshot.forEach(([queryKey, data]) => {
+        queryClient.setQueryData(queryKey, data);
+      });
+    },
+
+    onSettled: () => {
+      // Always sync with server truth, success or failure
       queryClient.invalidateQueries({ queryKey: roleKeys.all });
     },
   });
