@@ -1,4 +1,4 @@
-import { DropdownMenu, IconButton } from "@radix-ui/themes";
+import { DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { useTranslation } from "react-i18next";
 import type { User } from "../../types";
@@ -26,7 +26,19 @@ export function UserActionMenu({ user, onDeleteRequest }: UserActionMenuProps) {
         </IconButton>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content align="end">
-        <DropdownMenu.Item>{t("users.editUser")}</DropdownMenu.Item>
+        <DropdownMenu.Item disabled>
+          <Flex
+            justify="between"
+            align="center"
+            gap="4"
+            style={{ width: "100%" }}
+          >
+            <span>{t("users.editUser")}</span>
+            <Text size="1" color="gray">
+              {t("comingSoon.label")}
+            </Text>
+          </Flex>
+        </DropdownMenu.Item>
         <DropdownMenu.Item onSelect={() => onDeleteRequest(user)}>
           {t("users.deleteUser")}
         </DropdownMenu.Item>

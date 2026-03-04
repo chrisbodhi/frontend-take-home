@@ -62,6 +62,16 @@
     "userDeleteFailed": "Failed to delete user",
     "roleRenamed": "Role renamed to \"{{name}}\"",
     "undo": "Undo",
-    "dismiss": "Dismiss notification"
+    "dismiss": "Dismiss notification",
+    "notifications": "Notifications"
+  },
+  "comingSoon": {
+    "tooltip": "Coming soon",
+    "label": "Coming soon"
+  },
+  "offlineBanner": {
+    "offline": "You're offline — changes won't be saved until you reconnect.",
+    "apiDown": "Can't connect to the server — retrying…",
+    "restored": "You're back online."
   }
 }

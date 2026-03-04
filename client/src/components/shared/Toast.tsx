@@ -10,6 +10,11 @@ import { useToast } from "../../hooks/useToast";
 import { type ToastData } from "../../types";
 import "./Toast.css";
 
+// "foreground" = aria-live assertive (interrupts screen reader immediately)
+// "background" = aria-live polite (waits for a pause)
+const TOAST_ARIA_TYPE: Record<ToastData["type"], "foreground" | "background"> =
+  { success: "background", error: "foreground", undo: "foreground" };
+
 // ── Single Toast ─────────────────────────────────────────────────────
 
 function Toast({ data }: { data: ToastData }) {
@@ -28,6 +33,7 @@ function Toast({ data }: { data: ToastData }) {
   return (
     <RadixToast.Root
       className={`toast toast--${data.type}`}
+      type={TOAST_ARIA_TYPE[data.type]}
       open
       onOpenChange={(open) => {
         if (!open) dismiss(data.id);
@@ -85,13 +91,17 @@ function Toast({ data }: { data: ToastData }) {
 
 export function ToastContainer() {
   const { toasts } = useToast();
+  const { t } = useTranslation();
 
   return (
     <>
-      {toasts.map((t) => (
-        <Toast key={t.id} data={t} />
+      {toasts.map((toast) => (
+        <Toast key={toast.id} data={toast} />
       ))}
-      <RadixToast.Viewport className="toast-viewport" />
+      <RadixToast.Viewport
+        className="toast-viewport"
+        aria-label={t("toast.notifications")}
+      />
     </>
   );
 }

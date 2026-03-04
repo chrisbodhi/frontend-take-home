@@ -49,6 +49,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- class components are required for error boundaries and are incompatible with fast refresh
 function ErrorFallback({
   error,
   onReset,

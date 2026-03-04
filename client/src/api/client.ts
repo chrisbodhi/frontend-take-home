@@ -1,6 +1,6 @@
 import type { ApiError } from "../types";
 
-const BASE_URL = "http://localhost:3002";
+export const BASE_URL = "http://localhost:3002";
 
 // Abort requests that take longer than this to prevent hanging UI
 const REQUEST_TIMEOUT_MS = 10_000;

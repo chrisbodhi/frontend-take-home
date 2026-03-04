@@ -6,6 +6,7 @@ import { useUsers } from "../../api/users";
 import { useRolesLookup } from "../../api/roles";
 import { SearchInput } from "../shared/SearchInput";
 import { ErrorBanner } from "../shared/ErrorBanner";
+import { ComingSoonTooltip } from "../shared/ComingSoonTooltip";
 import { UsersTable } from "./UsersTable";
 
 interface UsersPanelProps {
@@ -51,16 +52,18 @@ export function UsersPanel({
           placeholder={t("users.searchPlaceholder")}
           aria-label={t("users.searchLabel")}
         />
-        <Button
-          style={{
-            flexShrink: 0,
-            paddingRight: 16,
-            paddingLeft: 16,
-          }}
-        >
-          <PlusIcon />
-          {t("users.addUser")}
-        </Button>
+        <ComingSoonTooltip>
+          <Button
+            style={{
+              flexShrink: 0,
+              paddingRight: 16,
+              paddingLeft: 16,
+            }}
+          >
+            <PlusIcon />
+            {t("users.addUser")}
+          </Button>
+        </ComingSoonTooltip>
       </Flex>
 
       {isError ? (
