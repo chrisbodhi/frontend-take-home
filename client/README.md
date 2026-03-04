@@ -20,7 +20,7 @@ Rather than breaking down the prescribed tasks into their own branches that buil
 - `3-a11y-pass` is where I identified and filled in gaps for accessibility.
 - `4-animate` is where animations were expanded and improved.
 - `5-error-states` is where more possible error states and suboptimal scenarios were addressed.
-- `6-polish` is where I added some tests, a health check, and document.
+- `6-polish` is where I added some tests, a health check, and documentation.
 
 ## What you would improve or do differently
 
