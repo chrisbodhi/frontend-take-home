@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/b/code/frontend-take-home/client && npm run lint && npm run typecheck"
+          }
+        ]
+      }
+    ]
+  }
+}
